@@ -70,7 +70,7 @@ async function delete_(req: Request, res: Response) {
 
 async function addProduct(req: Request, res: Response) {
   try {
-    const order_id = req.params.id as unknown as number;
+    const order_id = parseInt(req.params.order_id);
     const product_id = parseInt(req.body.product_id);
     const quantity = parseInt(req.body.quantity);
 

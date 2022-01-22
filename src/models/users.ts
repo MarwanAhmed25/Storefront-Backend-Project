@@ -28,7 +28,7 @@ export class User {
   async show(id: number): Promise<user> {
     try {
       const conn = await Client.connect();
-      const sql = 'select * from users where id =($1);';
+      const sql = 'select id,first_name,last_name from users where id =($1);';
       const res = await conn.query(sql, [id]);
       conn.release();
       return res.rows[0];
@@ -37,51 +37,51 @@ export class User {
     }
   }
 
-  async create(u: user): Promise<user> {
+  async create(u: user): Promise<string> {
 
     const hash = bcrypt.hashSync(u.password+extra, parseInt(round as string));
     try {
       const conn = await Client.connect();
       const sql =
-        'insert into users (first_name, last_name, password) values($1,$2,$3)RETURNING *;';
+        'insert into users (first_name, last_name, password) values($1,$2,$3);';
       const res = await conn.query(sql, [
         u.first_name,
         u.last_name,
         hash
       ]);
       conn.release();
-      return res.rows[0];
+      return 'created';
     } catch (e) {
       throw new Error(`${e}`);
     }
   }
 
-  async update(u: user): Promise<user> {
+  async update(u: user): Promise<string> {
     try {
       const conn = await Client.connect();
       const sql =
-        'update users set first_name=($1), last_name=($2) where id=($3) RETURNING *; ';
+        'update users set first_name=($1), last_name=($2) where id=($3) ; ';
       const res = await conn.query(sql, [u.first_name, u.last_name, u.id]);
       conn.release();
-      return res.rows[0];
+      return 'updated';
     } catch (e) {
       throw new Error(`${e}`);
     }
   }
 
-  async delete(id: number): Promise<user> {
+  async delete(id: number): Promise<string> {
     try {
       const conn = await Client.connect();
-      const sql = 'delete from users where id =($1) RETURNING*;';
+      const sql = 'delete from users where id =($1) ;';
       const res = await conn.query(sql, [id]);
       conn.release();
-      return res.rows[0];
+      return 'deleted';
     } catch (e) {
       throw new Error(`${e}`);
     }
   }
 
-  async auth(username:string, pass:string):Promise<user|null>{
+  async auth(username:string, pass:string):Promise<string>{
 
     try {
       const conn = await Client.connect();
@@ -90,9 +90,9 @@ export class User {
       if(res.rows.length){
         const isExist = bcrypt.compareSync(pass+extra, res.rows[0].password);
         if(isExist)
-          return res.rows[0];
+          return 'succeed';
       }
-      return null;
+      return 'fsild';
     } catch (e) {
       throw new Error(`${e}`);
     }

@@ -107,7 +107,7 @@ var Product = /** @class */ (function () {
                     case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, res.rows[0]];
+                        return [2 /*return*/, 'created'];
                     case 3:
                         e_3 = _a.sent();
                         throw new Error("".concat(e_3));
@@ -131,7 +131,7 @@ var Product = /** @class */ (function () {
                     case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, res.rows[0]];
+                        return [2 /*return*/, 'updated'];
                     case 3:
                         e_4 = _a.sent();
                         throw new Error("".concat(e_4));
@@ -155,7 +155,7 @@ var Product = /** @class */ (function () {
                     case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, res.rows[0]];
+                        return [2 /*return*/, 'deleted'];
                     case 3:
                         e_5 = _a.sent();
                         throw new Error("".concat(e_5));

@@ -164,7 +164,7 @@ function addProduct(req, res) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    order_id = req.params.id;
+                    order_id = parseInt(req.params.order_id);
                     product_id = parseInt(req.body.product_id);
                     quantity = parseInt(req.body.quantity);
                     return [4 /*yield*/, order_obj.addProduct(order_id, product_id, quantity)];

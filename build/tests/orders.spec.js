@@ -38,13 +38,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var orders_1 = require("../models/orders");
 var users_1 = require("../models/users");
+var products_1 = require("../models/products");
+var product__ = new products_1.Product();
 var order_ = new orders_1.Order();
 var user_ = new users_1.User();
+var p = {
+    id: 2,
+    name: '2',
+    price: 6,
+    category: '2'
+};
 var u = {
     id: 1,
-    first_name: '2',
-    last_name: '50',
-    password: 'marwan'
+    first_name: '22',
+    last_name: '55',
+    password: 'marwan123'
 };
 var o = {
     id: 1,
@@ -54,72 +62,89 @@ var o = {
 describe('Tests for Orders model', function () {
     //index function
     it('test index to be define', function () {
-        expect(order_.index(1)).toBeDefined();
+        expect(order_.index).toBeDefined();
     });
     it('test index to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res1, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, user_.create(u)];
                 case 1:
-                    _a.sent();
-                    expect(order_.index(1)).not.toThrowError;
+                    res1 = _a.sent();
+                    return [4 /*yield*/, order_.index(1)];
+                case 2:
+                    res = _a.sent();
+                    expect(res).not.toThrowError;
                     return [2 /*return*/];
             }
         });
     }); });
     //create function
     it('test create be define', function () {
-        expect(order_.create(o)).toBeDefined();
+        expect(order_.create).toBeDefined();
     });
     it('test to create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.create(u)];
+                case 0: return [4 /*yield*/, order_.create(o)];
                 case 1:
-                    _a.sent();
-                    expect(order_.create(o)).not.toThrowError;
+                    res = _a.sent();
+                    expect(res).toEqual('created');
                     return [2 /*return*/];
             }
         });
     }); });
     //show function
     it('test show be define', function () {
-        expect(order_.show(1, 1)).toBeDefined();
+        expect(order_.show).toBeDefined();
     });
     it('test to show to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(order_.show(1, 1)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, order_.show(1, 1)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).not.toThrowError;
+                    return [2 /*return*/];
+            }
         });
     }); });
     //update function
     it('test update be define', function () {
-        expect(order_.update(o)).toBeDefined();
+        expect(order_.update).toBeDefined();
     });
     it('test to update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(order_.update(o)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, order_.update(o)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('updated');
+                    return [2 /*return*/];
+            }
         });
     }); });
     //delete function
     it('test delete be define', function () {
-        expect(order_.delete(1, 1)).toBeDefined();
+        expect(order_.delete).toBeDefined();
     });
     it('test delete to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(order_.delete(1, 1)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, order_.delete(1, 1)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('deleted');
+                    return [2 /*return*/];
+            }
         });
     }); });
     //add product
     it('test add product be define', function () {
-        expect(order_.addProduct(1, 1, 4)).toBeDefined();
+        expect(order_.addProduct).toBeDefined();
     });
-    it('test addProduct to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            expect(order_.addProduct(1, 1, 4)).not.toThrowError;
-            return [2 /*return*/];
-        });
-    }); });
 });

@@ -32,39 +32,39 @@ export class Product {
     }
   }
 
-  async create(p: product): Promise<product> {
+  async create(p: product): Promise<string> {
     try {
       const conn = await Client.connect();
       const sql =
         'insert into products (name, price, category) values($1,$2,$3)RETURNING *;';
       const res = await conn.query(sql, [p.name, p.price, p.category]);
       conn.release();
-      return res.rows[0];
+      return 'created';
     } catch (e) {
       throw new Error(`${e}`);
     }
   }
 
-  async update(p: product): Promise<product> {
+  async update(p: product): Promise<string> {
     try {
       const conn = await Client.connect();
       const sql =
         'update products set name=($1), price=($2), category=($3) where id=($4) RETURNING *; ';
       const res = await conn.query(sql, [p.name, p.price, p.category, p.id]);
       conn.release();
-      return res.rows[0];
+      return 'updated';
     } catch (e) {
       throw new Error(`${e}`);
     }
   }
 
-  async delete(id: number): Promise<product> {
+  async delete(id: number): Promise<string> {
     try {
       const conn = await Client.connect();
       const sql = 'delete from products where id =($1) RETURNING*;';
       const res = await conn.query(sql, [id]);
       conn.release();
-      return res.rows[0];
+      return 'deleted';
     } catch (e) {
       throw new Error(`${e}`);
     }

@@ -35,95 +35,84 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-var products_1 = require("../models/products");
-var product_ = new products_1.Product();
-var p = {
-    id: 1,
-    name: '50',
-    price: 6,
-    category: '5'
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-describe('Tests for Product model', function () {
-    //index function
-    it('test index be define', function () {
-        expect(product_.index).toBeDefined();
-    });
-    it('test index to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+Object.defineProperty(exports, "__esModule", { value: true });
+var supertest_1 = __importDefault(require("supertest"));
+var users_1 = __importDefault(require("../../handlars/users"));
+var api = (0, supertest_1.default)(users_1.default);
+describe('user handlars api test', function () {
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.index()];
+                case 0: return [4 /*yield*/, api.get('/users')];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.status).toBe(200);
                     return [2 /*return*/];
             }
         });
     }); });
-    //create function
-    it('test create be define', function () {
-        expect(product_.create).toBeDefined();
-    });
-    it('test create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.create(p)];
+                case 0: return [4 /*yield*/, api.get('/users/1')];
                 case 1:
                     res = _a.sent();
-                    expect(res).toEqual('created');
+                    expect(res.status).toBe(200);
                     return [2 /*return*/];
             }
         });
     }); });
-    //show function
-    it('test show be define', function () {
-        expect(product_.show).toBeDefined();
-    });
-    it('test show to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.show(1)];
+                case 0: return [4 /*yield*/, api.post('/users')];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.status).toBe(200);
                     return [2 /*return*/];
             }
         });
     }); });
-    //update function
-    it('test update be define', function () {
-        expect(product_.update).toBeDefined();
-    });
-    it('test update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.update(p)];
+                case 0: return [4 /*yield*/, api.post('/users/1')];
                 case 1:
                     res = _a.sent();
-                    expect(res).toEqual('updated');
+                    expect(res.status).toBe(200);
                     return [2 /*return*/];
             }
         });
     }); });
-    //delete function
-    it('test delete be define', function () {
-        expect(product_.delete(1)).toBeDefined();
-    });
-    it('test delete to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.delete(1)];
+                case 0: return [4 /*yield*/, api.post('/login')];
                 case 1:
                     res = _a.sent();
-                    expect(res).toEqual('deleted');
+                    expect(res.status).toBe(200);
                     return [2 /*return*/];
             }
         });
     }); });
-    //
+    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, api.delete('/users/1')];
+                case 1:
+                    res = _a.sent();
+                    expect(res.status).toBe(200);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });

@@ -47,69 +47,98 @@ var u = {
 describe('Tests for User model', function () {
     //index function
     it('test index to be define', function () {
-        expect(user_.index()).toBeDefined();
+        expect(user_.index).toBeDefined();
     });
     it('test index to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(user_.index()).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.index()];
+                case 1:
+                    res = _a.sent();
+                    expect(res).not.toThrowError;
+                    return [2 /*return*/];
+            }
         });
     }); });
     //create function
     it('test create to be define', function () {
-        expect(user_.create(u)).toBeDefined();
+        expect(user_.create).toBeDefined();
     });
     it('test create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(user_.create(u)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.create(u)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('created');
+                    return [2 /*return*/];
+            }
         });
     }); });
     //show function
     it('test show to be define', function () {
-        expect(user_.show(2)).toBeDefined();
+        expect(user_.show).toBeDefined();
     });
     it('test show to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.show(1)];
+                case 0: return [4 /*yield*/, user_.show(2)];
                 case 1:
                     res = _a.sent();
-                    expect(user_.show(2)).not.toThrowError;
+                    expect(res).not.toThrowError;
                     return [2 /*return*/];
             }
         });
     }); });
     //update function
     it('test update to define', function () {
-        expect(user_.update(u)).toBeDefined();
+        expect(user_.update).toBeDefined();
     });
     it('test update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(user_.update(u)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.update(u)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('updated');
+                    return [2 /*return*/];
+            }
         });
     }); });
     //auth function
     it('test auth to define', function () {
-        expect(user_.auth('', '')).toBeDefined();
+        expect(user_.auth).toBeDefined();
     });
     it('test auth to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(user_.auth('21', 'marwan')).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.auth('21', 'marwan')];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('succeed');
+                    return [2 /*return*/];
+            }
         });
     }); });
     //delete function
     it('test delete to be define', function () {
-        expect(user_.delete(1)).toBeDefined();
+        expect(user_.delete).toBeDefined();
     });
     it('test delete to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
         return __generator(this, function (_a) {
-            expect(user_.delete(2)).not.toThrowError;
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.delete(2)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('deleted');
+                    return [2 /*return*/];
+            }
         });
     }); });
-    // //
 });

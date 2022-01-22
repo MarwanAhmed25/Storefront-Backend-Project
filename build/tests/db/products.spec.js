@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var products_1 = require("../models/products");
+var products_1 = require("../../models/products");
 var product_ = new products_1.Product();
 var p = {
     id: 1,

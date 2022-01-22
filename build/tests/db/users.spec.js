@@ -36,24 +36,24 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var products_1 = require("../models/products");
-var product_ = new products_1.Product();
-var p = {
-    id: 1,
-    name: '50',
-    price: 6,
-    category: '5'
+var users_1 = require("../../models/users");
+var user_ = new users_1.User();
+var u = {
+    id: 2,
+    first_name: '21',
+    last_name: '50',
+    password: 'marwan'
 };
-describe('Tests for Product model', function () {
+describe('Tests for User model', function () {
     //index function
-    it('test index be define', function () {
-        expect(product_.index).toBeDefined();
+    it('test index to be define', function () {
+        expect(user_.index).toBeDefined();
     });
     it('test index to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.index()];
+                case 0: return [4 /*yield*/, user_.index()];
                 case 1:
                     res = _a.sent();
                     expect(res).not.toThrowError;
@@ -62,14 +62,14 @@ describe('Tests for Product model', function () {
         });
     }); });
     //create function
-    it('test create be define', function () {
-        expect(product_.create).toBeDefined();
+    it('test create to be define', function () {
+        expect(user_.create).toBeDefined();
     });
     it('test create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.create(p)];
+                case 0: return [4 /*yield*/, user_.create(u)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('created');
@@ -78,14 +78,14 @@ describe('Tests for Product model', function () {
         });
     }); });
     //show function
-    it('test show be define', function () {
-        expect(product_.show).toBeDefined();
+    it('test show to be define', function () {
+        expect(user_.show).toBeDefined();
     });
     it('test show to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.show(1)];
+                case 0: return [4 /*yield*/, user_.show(2)];
                 case 1:
                     res = _a.sent();
                     expect(res).not.toThrowError;
@@ -94,14 +94,14 @@ describe('Tests for Product model', function () {
         });
     }); });
     //update function
-    it('test update be define', function () {
-        expect(product_.update).toBeDefined();
+    it('test update to define', function () {
+        expect(user_.update).toBeDefined();
     });
     it('test update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.update(p)];
+                case 0: return [4 /*yield*/, user_.update(u)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('updated');
@@ -109,15 +109,31 @@ describe('Tests for Product model', function () {
             }
         });
     }); });
+    //auth function
+    it('test auth to define', function () {
+        expect(user_.auth).toBeDefined();
+    });
+    it('test auth to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, user_.auth('21', 'marwan')];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('succeed');
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     //delete function
-    it('test delete be define', function () {
-        expect(product_.delete(1)).toBeDefined();
+    it('test delete to be define', function () {
+        expect(user_.delete).toBeDefined();
     });
     it('test delete to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.delete(1)];
+                case 0: return [4 /*yield*/, user_.delete(2)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('deleted');
@@ -125,5 +141,4 @@ describe('Tests for Product model', function () {
             }
         });
     }); });
-    //
 });

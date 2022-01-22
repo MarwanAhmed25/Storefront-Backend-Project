@@ -119,7 +119,7 @@ var Order = /** @class */ (function () {
                     case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, res.rows[0]];
+                        return [2 /*return*/, 'created'];
                     case 3:
                         e_3 = _a.sent();
                         throw new Error("".concat(e_3));
@@ -143,13 +143,13 @@ var Order = /** @class */ (function () {
                     case 2:
                         id_of_user = _a.sent();
                         user = id_of_user.rows[0];
-                        if (!(user == o.user_id)) return [3 /*break*/, 4];
+                        if (!(user.user_id == o.user_id)) return [3 /*break*/, 4];
                         sql = 'update orders set status=($1) where id=($2) RETURNING *; ';
                         return [4 /*yield*/, conn.query(sql, [o.status, o.id])];
                     case 3:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, res.rows[0]];
+                        return [2 /*return*/, 'updated'];
                     case 4: return [2 /*return*/, 'not allowed'];
                     case 5:
                         e_4 = _a.sent();
@@ -175,14 +175,14 @@ var Order = /** @class */ (function () {
                     case 2:
                         id_of_user = _a.sent();
                         user = id_of_user.rows[0];
-                        if (!(user == user_id)) return [3 /*break*/, 4];
+                        if (!(user.user_id == user_id)) return [3 /*break*/, 4];
                         sql = 'delete from orders where id =($1) RETURNING*;';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 3:
                         res = _a.sent();
                         resualt = res.rows[0];
                         conn.release();
-                        return [2 /*return*/, resualt];
+                        return [2 /*return*/, 'deleted'];
                     case 4: return [2 /*return*/, 'not allowed'];
                     case 5:
                         e_5 = _a.sent();
@@ -194,33 +194,24 @@ var Order = /** @class */ (function () {
     };
     Order.prototype.addProduct = function (order_id, product_id, quantity) {
         return __awaiter(this, void 0, void 0, function () {
-            var resualt, conn, q, order__, order_, sql, res, e_6;
+            var conn, sql, res, e_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 4, , 5]);
-                        resualt = void 0;
+                        _a.trys.push([0, 3, , 4]);
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        q = 'select * from orders where id=($1)';
-                        return [4 /*yield*/, conn.query(q, [order_id])];
-                    case 2:
-                        order__ = _a.sent();
-                        order_ = order__.rows[0];
-                        if (order_.status == STATUS.closed) {
-                            return [2 /*return*/, 'not allowed closed order'];
-                        }
                         sql = 'insert into order_products (quantity, order_id, product_id) values($1,$2,$3)RETURNING *;';
                         return [4 /*yield*/, conn.query(sql, [quantity, order_id, product_id])];
-                    case 3:
+                    case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, 'succeed'];
-                    case 4:
+                        return [2 /*return*/, 'added'];
+                    case 3:
                         e_6 = _a.sent();
                         throw new Error("".concat(e_6));
-                    case 5: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
