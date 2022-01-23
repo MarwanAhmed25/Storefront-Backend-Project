@@ -7,7 +7,7 @@ async function index(req: Request, res: Response) {
 
   try{
     const resault = await product_obj.index();
-    res.json(resault);
+    res.status(200).json(resault);
   }catch(e)
   {
     console.log(`${e}`);
@@ -21,7 +21,7 @@ async function show(req: Request, res: Response) {
     const resault = await product_obj.show(
       req.params.id as unknown as number
     );
-    res.json(resault);
+    res.status(200).json(resault);
   }catch(e)
   {
     console.log(`${e}`);
@@ -38,7 +38,7 @@ async function update(req: Request, res: Response) {
       category: req.body.catogery,
     };
     const resault = await product_obj.update(p);
-    res.json(resault);
+    res.status(200).json(resault);
   } catch (e) {
     console.log(`${e}`);
     res.status(400).json(`${e}`);
@@ -53,7 +53,7 @@ async function create(req: Request, res: Response) {
       category: req.body.catogery,
     };
     const resault = await product_obj.create(p);
-    res.json(resault);
+    res.status(200).json(resault);
   } catch (e) {
     console.log(`${e}`);
     res.status(400).json(`${e}`);
@@ -65,7 +65,7 @@ async function delete_(req: Request, res: Response) {
     const resault = await product_obj.delete(
       req.params.id as unknown as number
     );
-    res.json(resault);
+    res.status(200).json(resault);
   } catch (e) {
     console.log(`${e}`);
     res.status(400).json(`${e}`);
@@ -76,7 +76,7 @@ function mainRoutes(app: Application) {
   app.get('/products', index);
   app.get('/products/:id', show);
   app.post('/products', create);
-  app.post('/products/:id', update);
+  app.patch('/products/:id', update);
   app.delete('/products/:id', delete_);
 }
 

@@ -55,7 +55,7 @@ function index(req, res) {
                     return [4 /*yield*/, user_obj.index()];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _a.sent();
@@ -77,7 +77,7 @@ function show(req, res) {
                     return [4 /*yield*/, user_obj.show(parseInt(req.params.id))];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_2 = _a.sent();
@@ -105,7 +105,7 @@ function update(req, res) {
                     return [4 /*yield*/, user_obj.update(u)];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_3 = _a.sent();
@@ -133,7 +133,7 @@ function create(req, res) {
                 case 1:
                     resault = _a.sent();
                     token = jsonwebtoken_1.default.sign({ user: resault }, secret);
-                    res.json(token);
+                    res.status(200).json(token);
                     return [3 /*break*/, 3];
                 case 2:
                     e_4 = _a.sent();
@@ -155,7 +155,7 @@ function delete_(req, res) {
                     return [4 /*yield*/, user_obj.delete(parseInt(req.params.id))];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_5 = _a.sent();
@@ -179,9 +179,9 @@ function login(req, res) {
                 case 1:
                     resault = _b.sent();
                     if (resault != null || jsonwebtoken_1.default.verify(token, secret))
-                        res.send('succeed');
+                        res.status(200).send('succeed');
                     else
-                        res.send('faild');
+                        res.status(400).send('faild');
                     return [3 /*break*/, 3];
                 case 2:
                     e_6 = _b.sent();
@@ -198,7 +198,7 @@ function mainRoutes(app) {
     app.get('/users', index);
     app.get('/users/:id', show);
     app.post('/users', create);
-    app.post('/users/:id', update);
+    app.patch('/users/:id', update);
     app.delete('/users/:id', delete_);
 }
 exports.default = mainRoutes;

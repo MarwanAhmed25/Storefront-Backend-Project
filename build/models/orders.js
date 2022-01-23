@@ -75,31 +75,24 @@ var Order = /** @class */ (function () {
     };
     Order.prototype.show = function (id, user_id) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, q, id_of_user, user, sql, res, e_2;
+            var conn, q, res, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 5, , 6]);
+                        _a.trys.push([0, 3, , 4]);
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        q = 'select user_id from orders where id=($1)';
-                        return [4 /*yield*/, conn.query(q, [id])];
+                        q = 'select * from orders where id=($1) and user_id=($2);';
+                        return [4 /*yield*/, conn.query(q, [id, user_id])];
                     case 2:
-                        id_of_user = _a.sent();
-                        user = id_of_user.rows[0];
-                        if (!(user == user_id)) return [3 /*break*/, 4];
-                        sql = 'select * from orders where id =($1);';
-                        return [4 /*yield*/, conn.query(sql, [id])];
-                    case 3:
                         res = _a.sent();
                         conn.release();
                         return [2 /*return*/, res.rows[0]];
-                    case 4: return [2 /*return*/, 'not allowed'];
-                    case 5:
+                    case 3:
                         e_2 = _a.sent();
                         throw new Error("".concat(e_2));
-                    case 6: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -161,33 +154,25 @@ var Order = /** @class */ (function () {
     };
     Order.prototype.delete = function (id, user_id) {
         return __awaiter(this, void 0, void 0, function () {
-            var resualt, conn, q, id_of_user, user, sql, res, e_5;
+            var resualt, conn, q, id_of_user, e_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 5, , 6]);
+                        _a.trys.push([0, 3, , 4]);
                         resualt = void 0;
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        q = 'select user_id from orders where id=($1)';
-                        return [4 /*yield*/, conn.query(q, [id])];
+                        q = 'select user_id from orders where id=($1) and user_id=($2)';
+                        return [4 /*yield*/, conn.query(q, [id, user_id])];
                     case 2:
                         id_of_user = _a.sent();
-                        user = id_of_user.rows[0];
-                        if (!(user.user_id == user_id)) return [3 /*break*/, 4];
-                        sql = 'delete from orders where id =($1) RETURNING*;';
-                        return [4 /*yield*/, conn.query(sql, [id])];
-                    case 3:
-                        res = _a.sent();
-                        resualt = res.rows[0];
                         conn.release();
                         return [2 /*return*/, 'deleted'];
-                    case 4: return [2 /*return*/, 'not allowed'];
-                    case 5:
+                    case 3:
                         e_5 = _a.sent();
                         throw new Error("".concat(e_5));
-                    case 6: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });

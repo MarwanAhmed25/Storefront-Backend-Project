@@ -66,6 +66,8 @@ Storefront Backend Project
             3-npm run test --> build and test the code
             4-node build or nodemon build or npm run start --> run the project
 
+            5-npm run dev-server --> to run ts-watch
+        
         you can run this script and it will run all the 4 scripts above:
             npm run dev
 

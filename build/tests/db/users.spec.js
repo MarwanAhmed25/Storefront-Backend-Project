@@ -38,12 +38,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var users_1 = require("../../models/users");
 var user_ = new users_1.User();
-var u = {
-    id: 2,
-    first_name: '21',
-    last_name: '50',
-    password: 'marwan'
-};
 describe('Tests for User model', function () {
     //index function
     it('test index to be define', function () {
@@ -56,7 +50,7 @@ describe('Tests for User model', function () {
                 case 0: return [4 /*yield*/, user_.index()];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.length).toEqual(1);
                     return [2 /*return*/];
             }
         });
@@ -66,10 +60,17 @@ describe('Tests for User model', function () {
         expect(user_.create).toBeDefined();
     });
     it('test create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var u, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.create(u)];
+                case 0:
+                    u = {
+                        id: 2,
+                        first_name: '21',
+                        last_name: '50',
+                        password: 'marwan'
+                    };
+                    return [4 /*yield*/, user_.create(u)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('created');
@@ -85,10 +86,10 @@ describe('Tests for User model', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.show(2)];
+                case 0: return [4 /*yield*/, user_.show(1)];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.id).toEqual(1);
                     return [2 /*return*/];
             }
         });
@@ -98,10 +99,17 @@ describe('Tests for User model', function () {
         expect(user_.update).toBeDefined();
     });
     it('test update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var u, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.update(u)];
+                case 0:
+                    u = {
+                        id: 2,
+                        first_name: '100',
+                        last_name: '50',
+                        password: 'marwan'
+                    };
+                    return [4 /*yield*/, user_.update(u)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('updated');
@@ -114,11 +122,21 @@ describe('Tests for User model', function () {
         expect(user_.auth).toBeDefined();
     });
     it('test auth to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var u, res1, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.auth('21', 'marwan')];
+                case 0:
+                    u = {
+                        id: 3,
+                        first_name: '21',
+                        last_name: '50',
+                        password: 'marwan'
+                    };
+                    return [4 /*yield*/, user_.create(u)];
                 case 1:
+                    res1 = _a.sent();
+                    return [4 /*yield*/, user_.auth('21', 'marwan')];
+                case 2:
                     res = _a.sent();
                     expect(res).toEqual('succeed');
                     return [2 /*return*/];

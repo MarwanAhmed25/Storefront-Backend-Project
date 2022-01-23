@@ -24,3 +24,5 @@ app.listen(port, ():void=>{
 userRoute(app);
 orderRoute(app);
 productRoute(app);
+
+export default app;

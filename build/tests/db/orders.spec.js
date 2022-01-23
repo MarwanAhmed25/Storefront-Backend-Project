@@ -43,7 +43,7 @@ var product__ = new products_1.Product();
 var order_ = new orders_1.Order();
 var user_ = new users_1.User();
 var p = {
-    id: 2,
+    id: 1,
     name: '2',
     price: 6,
     category: '2'
@@ -65,16 +65,13 @@ describe('Tests for Orders model', function () {
         expect(order_.index).toBeDefined();
     });
     it('test index to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res1, res;
+        var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_.create(u)];
+                case 0: return [4 /*yield*/, order_.index(1)];
                 case 1:
-                    res1 = _a.sent();
-                    return [4 /*yield*/, order_.index(1)];
-                case 2:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.length).toEqual(2);
                     return [2 /*return*/];
             }
         });
@@ -84,10 +81,16 @@ describe('Tests for Orders model', function () {
         expect(order_.create).toBeDefined();
     });
     it('test to create to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var o_, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, order_.create(o)];
+                case 0:
+                    o_ = {
+                        id: 3,
+                        status: "open",
+                        user_id: 1
+                    };
+                    return [4 /*yield*/, order_.create(o_)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('created');
@@ -106,7 +109,7 @@ describe('Tests for Orders model', function () {
                 case 0: return [4 /*yield*/, order_.show(1, 1)];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.id).toEqual(1);
                     return [2 /*return*/];
             }
         });
@@ -116,10 +119,16 @@ describe('Tests for Orders model', function () {
         expect(order_.update).toBeDefined();
     });
     it('test to update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var o_, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, order_.update(o)];
+                case 0:
+                    o_ = {
+                        id: 2,
+                        status: "complete",
+                        user_id: 1
+                    };
+                    return [4 /*yield*/, order_.update(o_)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('updated');
@@ -135,7 +144,7 @@ describe('Tests for Orders model', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, order_.delete(1, 1)];
+                case 0: return [4 /*yield*/, order_.delete(2, 1)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('deleted');
@@ -147,4 +156,16 @@ describe('Tests for Orders model', function () {
     it('test add product be define', function () {
         expect(order_.addProduct).toBeDefined();
     });
+    it('test add product to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, order_.addProduct(1, 1, 5)];
+                case 1:
+                    res = _a.sent();
+                    expect(res).toEqual('added');
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });

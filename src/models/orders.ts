@@ -21,21 +21,14 @@ export class Order {
     }
   }
 
-  async show(id: number, user_id:number): Promise<order|string> {
+  async show(id: number, user_id:number): Promise<order> {
     try {
 
       const conn = await Client.connect();
-      const q = 'select user_id from orders where id=($1)';
-      const id_of_user = await conn.query(q, [id]);
-      const user = id_of_user.rows[0];
-      if(user == user_id)
-      {
-        const sql = 'select * from orders where id =($1);';
-        const res = await conn.query(sql, [id]);
-        conn.release();
-        return res.rows[0];
-      }
-      return 'not allowed';
+      const q = 'select * from orders where id=($1) and user_id=($2);';
+      const res = await conn.query(q, [id,user_id]);
+      conn.release();
+      return res.rows[0];
     } catch (e) {
       throw new Error(`${e}`);
     }
@@ -79,20 +72,11 @@ export class Order {
       let resualt:order;
 
       const conn = await Client.connect();
-      const q = 'select user_id from orders where id=($1)';
-      const id_of_user = await conn.query(q, [id]);
-      const user = id_of_user.rows[0];
+      const q = 'select user_id from orders where id=($1) and user_id=($2)';
+      const id_of_user = await conn.query(q, [id,user_id]);
+      conn.release();
+      return 'deleted';
 
-      if(user.user_id == user_id)
-      {
-        const sql = 'delete from orders where id =($1) RETURNING*;';
-        const res = await conn.query(sql, [id]);
-        resualt = res.rows[0];
-        conn.release();
-        return 'deleted';
-      }
-
-      return 'not allowed';
     } catch (e) {
       throw new Error(`${e}`);
     }

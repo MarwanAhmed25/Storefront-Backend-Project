@@ -40,10 +40,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
-var users_1 = __importDefault(require("../../handlars/users"));
-var api = (0, supertest_1.default)(users_1.default);
-describe('user handlars api test', function () {
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
+var index_1 = __importDefault(require("../../index"));
+var users_1 = require("../../models/users");
+var user_ = new users_1.User();
+var api = (0, supertest_1.default)(index_1.default);
+describe('users handlars api test', function () {
+    it('users index route', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -55,7 +57,7 @@ describe('user handlars api test', function () {
             }
         });
     }); });
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('users show route', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -67,11 +69,17 @@ describe('user handlars api test', function () {
             }
         });
     }); });
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+    it('users create route', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var d, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post('/users')];
+                case 0:
+                    d = {
+                        'first_name': 'marwan',
+                        'last_name': 'ahmed',
+                        'password': 'marwan'
+                    };
+                    return [4 /*yield*/, api.post('/users').send(d)];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -79,11 +87,16 @@ describe('user handlars api test', function () {
             }
         });
     }); });
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+    it('users update route', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var d, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post('/users/1')];
+                case 0:
+                    d = {
+                        'first_name': 'bassam',
+                        'last_name': 'ahmed'
+                    };
+                    return [4 /*yield*/, api.patch('/users/1').send(d)];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -91,11 +104,16 @@ describe('user handlars api test', function () {
             }
         });
     }); });
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+    it('users login route', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var d, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.post('/login')];
+                case 0:
+                    d = {
+                        "username": 'marwan',
+                        "password": "marwan"
+                    };
+                    return [4 /*yield*/, api.post('/login').send(d)];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -103,11 +121,11 @@ describe('user handlars api test', function () {
             }
         });
     }); });
-    it('/users route test', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('users delete route', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.delete('/users/1')];
+                case 0: return [4 /*yield*/, api.delete('/users/2')];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

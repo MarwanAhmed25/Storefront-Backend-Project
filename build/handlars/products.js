@@ -48,7 +48,7 @@ function index(req, res) {
                     return [4 /*yield*/, product_obj.index()];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _a.sent();
@@ -70,7 +70,7 @@ function show(req, res) {
                     return [4 /*yield*/, product_obj.show(req.params.id)];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_2 = _a.sent();
@@ -98,7 +98,7 @@ function update(req, res) {
                     return [4 /*yield*/, product_obj.update(p)];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_3 = _a.sent();
@@ -125,7 +125,7 @@ function create(req, res) {
                     return [4 /*yield*/, product_obj.create(p)];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_4 = _a.sent();
@@ -147,7 +147,7 @@ function delete_(req, res) {
                     return [4 /*yield*/, product_obj.delete(req.params.id)];
                 case 1:
                     resault = _a.sent();
-                    res.json(resault);
+                    res.status(200).json(resault);
                     return [3 /*break*/, 3];
                 case 2:
                     e_5 = _a.sent();
@@ -163,7 +163,7 @@ function mainRoutes(app) {
     app.get('/products', index);
     app.get('/products/:id', show);
     app.post('/products', create);
-    app.post('/products/:id', update);
+    app.patch('/products/:id', update);
     app.delete('/products/:id', delete_);
 }
 exports.default = mainRoutes;

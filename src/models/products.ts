@@ -61,7 +61,7 @@ export class Product {
   async delete(id: number): Promise<string> {
     try {
       const conn = await Client.connect();
-      const sql = 'delete from products where id =($1) RETURNING*;';
+      const sql = 'delete from products where id =($1);';
       const res = await conn.query(sql, [id]);
       conn.release();
       return 'deleted';

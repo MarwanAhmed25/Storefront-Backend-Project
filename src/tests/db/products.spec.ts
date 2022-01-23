@@ -2,8 +2,8 @@ import {Product,product} from '../../models/products';
 
 const product_ = new Product();
 const p:product={
-    id:1,
-    name:'50',
+    id:2,
+    name:'test',
     price:6,
     category:'5'
 };
@@ -15,7 +15,7 @@ describe('Tests for Product model', ()=>{
     })
     it('test index to equal',async()=>{
         const res = await product_.index();
-        expect(res).not.toThrowError;
+        expect(res.length).toEqual(1);
     })
 
     //create function
@@ -33,7 +33,8 @@ describe('Tests for Product model', ()=>{
     })
     it('test show to equal',async()=>{
         const res = await product_.show(1);
-        expect(res).not.toThrowError;
+        
+        expect(res).toEqual({ id: 1, name: 'marwan', price: 20, category: 'marwan' });
     })
 
     //update function
@@ -41,17 +42,23 @@ describe('Tests for Product model', ()=>{
         expect(product_.update).toBeDefined();
     })
     it('test update to equal',async()=>{
-        const res = await product_.update(p);
+        const p_:product={
+            id:2,
+            name:'100',
+            price:6,
+            category:'5'
+        };
+        const res = await product_.update(p_);
         expect(res).toEqual('updated');
     })
     //delete function
     it('test delete be define',()=>{
-        expect(product_.delete(1)).toBeDefined();
+        expect(product_.delete).toBeDefined();
     })
     it('test delete to equal',async()=>{
-        const res = await product_.delete(1);
+        const res = await product_.delete(2);
         expect(res).toEqual('deleted');
     })
-    //
+    
     
 })

@@ -6,7 +6,7 @@ Database Schema:
         index   --> /users     [get]    no content in body
         show    --> /users/:id [get]    no content in body
         create  --> /users     [post]   body{first_name, last_name, password}
-        update  --> /users/:id [post]   body{first_name, last_name}
+        update  --> /users/:id [patch]   body{first_name, last_name}
         delete  --> /users/:id [delete] no content in body
         login   --> /login     [post]   body{username, password}
 
@@ -17,7 +17,7 @@ Database Schema:
         index  --> /products     [get] no content in body
         show   --> /products/:id [get] no content in body
         create --> /products     [post] body{name, price, catogery}
-        update --> /products/:id [post] body{name, price, catogery}
+        update --> /products/:id [patch] body{name, price, catogery}
         delete --> /products/:id [delete] no content in body
 
     Orders Table:
@@ -27,7 +27,7 @@ Database Schema:
         index      --> /users/:user_id/orders           [get] no content in body
         show       --> /users/:user_id/orders/:order_id [get] no content in body
         create     --> /users/:user_id/orders           [post] body{status}
-        update     --> /users/:user_id/orders/:order_id [post] body{status}
+        update     --> /users/:user_id/orders/:order_id [patch] body{status}
         delete     --> /users/:user_id/orders/:order_id [delete] no content in body
 
     order_products Table:

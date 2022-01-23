@@ -39,8 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var products_1 = require("../../models/products");
 var product_ = new products_1.Product();
 var p = {
-    id: 1,
-    name: '50',
+    id: 2,
+    name: 'test',
     price: 6,
     category: '5'
 };
@@ -56,7 +56,7 @@ describe('Tests for Product model', function () {
                 case 0: return [4 /*yield*/, product_.index()];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res.length).toEqual(1);
                     return [2 /*return*/];
             }
         });
@@ -88,7 +88,7 @@ describe('Tests for Product model', function () {
                 case 0: return [4 /*yield*/, product_.show(1)];
                 case 1:
                     res = _a.sent();
-                    expect(res).not.toThrowError;
+                    expect(res).toEqual({ id: 1, name: 'marwan', price: 20, category: 'marwan' });
                     return [2 /*return*/];
             }
         });
@@ -98,10 +98,17 @@ describe('Tests for Product model', function () {
         expect(product_.update).toBeDefined();
     });
     it('test update to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var p_, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.update(p)];
+                case 0:
+                    p_ = {
+                        id: 2,
+                        name: '100',
+                        price: 6,
+                        category: '5'
+                    };
+                    return [4 /*yield*/, product_.update(p_)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('updated');
@@ -111,13 +118,13 @@ describe('Tests for Product model', function () {
     }); });
     //delete function
     it('test delete be define', function () {
-        expect(product_.delete(1)).toBeDefined();
+        expect(product_.delete).toBeDefined();
     });
     it('test delete to equal', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, product_.delete(1)];
+                case 0: return [4 /*yield*/, product_.delete(2)];
                 case 1:
                     res = _a.sent();
                     expect(res).toEqual('deleted');
@@ -125,5 +132,4 @@ describe('Tests for Product model', function () {
             }
         });
     }); });
-    //
 });

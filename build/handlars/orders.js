@@ -187,7 +187,7 @@ function mainRoutes(app) {
     app.get('/users/:user_id/orders/:order_id', show);
     app.post('/users/:user_id/orders', create);
     app.post('/users/:user_id/orders/:order_id/products', addProduct);
-    app.post('/users/:user_id/orders/:order_id', update);
+    app.patch('/users/:user_id/orders/:order_id', update);
     app.delete('/users/:user_id/orders/:order_id', delete_);
 }
 exports.default = mainRoutes;
