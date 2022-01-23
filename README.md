@@ -17,6 +17,8 @@ Storefront Backend Project
     Create a RESTful API to be accessible to the frontend developer. writing test, secured user information with encryption, and provide tokens for integration into the frontend.
 
     -How to run the project
+        
+        port: 3000
 
     -set up
         install an ide for running node (recommended vs code) and browser (chrome)
@@ -24,12 +26,13 @@ Storefront Backend Project
         install node v16.13.2 and npm 8.1.2 and postgres for database
 
         install as Development Dependencies [npm i --save-dev package@version ex: npm i --save-dev typescript@4.5.4]
+            "@types/bcrypt": "^5.0.0",
             "@types/express": "^4.17.13",
             "@types/express-validator": "^3.0.0",
             "@types/jasmine": "^3.10.3",
+            "@types/jsonwebtoken": "^8.5.8",
             "@types/node": "^17.0.8",
             "@types/pg": "^8.6.4",
-            "@types/bcrypt": "^5.0.0",
             "@types/supertest": "^2.0.11",
             "@typescript-eslint/parser": "^5.10.0",
             "eslint": "^7.32.0",
@@ -45,14 +48,18 @@ Storefront Backend Project
             "prettier": "^2.5.1",
             "supertest": "^6.2.1",
             "ts-node": "^10.4.0",
+            "tsc-watch": "^4.6.0",
             "typescript": "^4.5.4"
 
         install as Dependencies [npm i package@version ex: npm i - express@4.17.2]
+            "bcrypt": "^5.0.1",
+            "body-parser": "^1.19.1",
+            "cors": "^2.8.5",
+            "dotenv": "^14.2.0",
             "express": "^4.17.2",
             "express-validator": "^6.14.0",
-            "bcrypt": "^5.0.1",
-            "dotenv": "^14.2.0",
-            "jsonwebtoken": "^8.5.1"
+            "jsonwebtoken": "^8.5.1",
+            "pg": "^8.7.1"
             
         config scripts for (prettier, eslint, jasmine)
 
@@ -61,6 +68,7 @@ Storefront Backend Project
         create database = "store" and super user = "marwan" & password ="marwan" with postgres as in .env file or name as you want but change the name exist in the .env file after that run the migrations file with [db-migrate up]
 
         Database: 
+                port: 5432
                 create user: create user marwan with password 'marwan';
 
                 create database: create database store owner marwan;
