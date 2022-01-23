@@ -6,6 +6,7 @@ Storefront Backend Project
         -set up 
         -run project 
         -structure of request 
+
     .Technologies
     .Tools 
     .Resources 
@@ -49,7 +50,8 @@ Storefront Backend Project
         install as Dependencies [npm i package@version ex: npm i - express@4.17.2]
             "express": "^4.17.2",
             "express-validator": "^6.14.0",
-            "bcrypt": "^5.0.1"
+            "bcrypt": "^5.0.1",
+            "dotenv": "^14.2.0",
             "jsonwebtoken": "^8.5.1"
             
         config scripts for (prettier, eslint, jasmine)
@@ -57,6 +59,15 @@ Storefront Backend Project
     -run the project
 
         create database = "store" and super user = "marwan" & password ="marwan" with postgres as in .env file or name as you want but change the name exist in the .env file after that run the migrations file with [db-migrate up]
+
+        Database: 
+                create user: create user marwan with password 'marwan';
+
+                create database: create database store owner marwan;
+                                 create database store_test owner marwan;
+                
+                grant all on database store to marwan;
+                grant all on database store_test to marwan;
 
         if you don't have db-migrate install it [npm i db-migrate , npm i db-migrate db-migrate-pg]!!! 
 
