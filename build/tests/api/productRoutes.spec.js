@@ -42,9 +42,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
 var index_1 = __importDefault(require("../../index"));
 var users_1 = require("../../models/users");
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+var secret = process.env.token;
 var user_ = new users_1.User();
 var api = (0, supertest_1.default)(index_1.default);
-var permession = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdF9uYW1lIjoibWFybyIsImxhc3RfbmFtZSI6Im5ubiIsInBhc3N3b3JkIjoiJDJiJDA1JG1sM0doNVc1ZllsUWwuZU1Bd25BTk9hWHhMRnJVczVDTVl4ZVVab1ZYVTBQb2RxbzUxaXUyIn0sImlhdCI6MTY0MzA1MzU4OH0.1_ZVriOVv5O3umt_k9pikDcRceWBJBIMjN1F09MXA8Y";
+var permession, token;
 describe('products handlars api test', function () {
     it('products index route', function () { return __awaiter(void 0, void 0, void 0, function () {
         var res;
@@ -75,7 +79,10 @@ describe('products handlars api test', function () {
         var d, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
+                case 0: return [4 /*yield*/, user_.show(1)];
+                case 1:
+                    token = _a.sent();
+                    permession = jsonwebtoken_1.default.sign({ user: token }, secret);
                     d = {
                         'name': 'marwan',
                         'price': 5,
@@ -83,7 +90,7 @@ describe('products handlars api test', function () {
                         'token': permession
                     };
                     return [4 /*yield*/, api.post('/products').send(d)];
-                case 1:
+                case 2:
                     res = _a.sent();
                     expect(res.status).toBe(200);
                     return [2 /*return*/];
@@ -111,17 +118,13 @@ describe('products handlars api test', function () {
         });
     }); });
     it('products delete route', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res, _a, _b;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
+        var res;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
                 case 0: return [4 /*yield*/, api.delete('/products/2').send({ 'token': permession })];
                 case 1:
-                    res = _c.sent();
+                    res = _a.sent();
                     expect(res.status).toBe(200);
-                    _b = (_a = console).log;
-                    return [4 /*yield*/, user_.index()];
-                case 2:
-                    _b.apply(_a, [_c.sent()]);
                     return [2 /*return*/];
             }
         });

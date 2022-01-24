@@ -1,12 +1,16 @@
 import supertest from "supertest";
 import route from '../../index';
 import { User, user } from "../../models/users";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const secret:string = (process.env.token as unknown)as string;
 
 const user_ = new User();
 const api = supertest(route);
-const permession = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdF9uYW1lIjoibWFybyIsImxhc3RfbmFtZSI6Im5ubiIsInBhc3N3b3JkIjoiJDJiJDA1JG1sM0doNVc1ZllsUWwuZU1Bd25BTk9hWHhMRnJVczVDTVl4ZVVab1ZYVTBQb2RxbzUxaXUyIn0sImlhdCI6MTY0MzA1MzU4OH0.1_ZVriOVv5O3umt_k9pikDcRceWBJBIMjN1F09MXA8Y`;
-
+let permession:string,token:user;
 describe('products handlars api test',()=>{
 
     it('products index route',async ()=>{
@@ -21,6 +25,8 @@ describe('products handlars api test',()=>{
     })
     //name, price, catogery
     it('products create route',async ()=>{
+        token = await user_.show(1);
+        permession = jwt.sign({user:token}, secret);
         const d={
             'name':'marwan',
             'price':5,
@@ -45,9 +51,6 @@ describe('products handlars api test',()=>{
     it('products delete route',async ()=>{
         const res = await api.delete('/products/2').send({'token':permession});
         expect(res.status).toBe(200);
-
-        console.log(await user_.index());
-        //console.log(await product.index());
         
     })
 })

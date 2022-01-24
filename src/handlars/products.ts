@@ -48,7 +48,8 @@ async function update(req: Request, res: Response) {
       res.status(400).json(`${e}`);
     }
   }
-  res.send('Not allowed login first!!');
+  else
+    res.send('Not allowed login first!!');
 
 }
 
@@ -68,7 +69,8 @@ async function create(req: Request, res: Response) {
       res.status(400).json(`${e}`);
     }
   }
-  res.send('Not allowed login first!!');
+  else
+    res.send('Not allowed login first!!');
 
 }
 
@@ -85,7 +87,8 @@ async function delete_(req: Request, res: Response) {
       res.status(400).json(`${e}`);
     }
   }
-  res.send('Not allowed login first!!');
+  else
+    res.send('Not allowed login first!!');
 
 }
 

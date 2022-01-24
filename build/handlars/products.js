@@ -95,7 +95,7 @@ function update(req, res) {
                 case 0:
                     token = req.body.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
-                    if (!permession) return [3 /*break*/, 4];
+                    if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -114,9 +114,11 @@ function update(req, res) {
                     e_3 = _a.sent();
                     res.status(400).json("".concat(e_3));
                     return [3 /*break*/, 4];
-                case 4:
+                case 4: return [3 /*break*/, 6];
+                case 5:
                     res.send('Not allowed login first!!');
-                    return [2 /*return*/];
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });
@@ -129,7 +131,7 @@ function create(req, res) {
                 case 0:
                     token = req.body.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
-                    if (!permession) return [3 /*break*/, 4];
+                    if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -147,9 +149,11 @@ function create(req, res) {
                     e_4 = _a.sent();
                     res.status(400).json("".concat(e_4));
                     return [3 /*break*/, 4];
-                case 4:
+                case 4: return [3 /*break*/, 6];
+                case 5:
                     res.send('Not allowed login first!!');
-                    return [2 /*return*/];
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });
@@ -162,7 +166,7 @@ function delete_(req, res) {
                 case 0:
                     token = req.body.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
-                    if (!permession) return [3 /*break*/, 4];
+                    if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
@@ -175,9 +179,11 @@ function delete_(req, res) {
                     e_5 = _a.sent();
                     res.status(400).json("".concat(e_5));
                     return [3 /*break*/, 4];
-                case 4:
+                case 4: return [3 /*break*/, 6];
+                case 5:
                     res.send('Not allowed login first!!');
-                    return [2 /*return*/];
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });
