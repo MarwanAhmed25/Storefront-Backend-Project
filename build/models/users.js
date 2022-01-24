@@ -82,7 +82,7 @@ var User = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'select id,first_name,last_name from users where id =($1);';
+                        sql = 'select * from users where id =($1);';
                         return [4 /*yield*/, conn.query(sql, [id])];
                     case 2:
                         res = _a.sent();
@@ -109,7 +109,7 @@ var User = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 2:
                         conn = _a.sent();
-                        sql = 'insert into users (first_name, last_name, password) values($1,$2,$3);';
+                        sql = 'insert into users (first_name, last_name, password) values($1,$2,$3)RETURNING*;';
                         return [4 /*yield*/, conn.query(sql, [
                                 u.first_name,
                                 u.last_name,
@@ -118,7 +118,7 @@ var User = /** @class */ (function () {
                     case 3:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, 'created'];
+                        return [2 /*return*/, res.rows[0]];
                     case 4:
                         e_3 = _a.sent();
                         throw new Error("".concat(e_3));
@@ -137,12 +137,12 @@ var User = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         conn = _a.sent();
-                        sql = 'update users set first_name=($1), last_name=($2) where id=($3) ; ';
+                        sql = 'update users set first_name=($1), last_name=($2) where id=($3)RETURNING*; ';
                         return [4 /*yield*/, conn.query(sql, [u.first_name, u.last_name, u.id])];
                     case 2:
                         res = _a.sent();
                         conn.release();
-                        return [2 /*return*/, 'updated'];
+                        return [2 /*return*/, res.rows[0]];
                     case 3:
                         e_4 = _a.sent();
                         throw new Error("".concat(e_4));
@@ -194,7 +194,7 @@ var User = /** @class */ (function () {
                             if (isExist)
                                 return [2 /*return*/, 'succeed'];
                         }
-                        return [2 /*return*/, 'fsild'];
+                        return [2 /*return*/, 'faild'];
                     case 3:
                         e_6 = _a.sent();
                         throw new Error("".concat(e_6));

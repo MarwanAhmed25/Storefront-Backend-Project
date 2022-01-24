@@ -28,6 +28,8 @@ Storefront Backend Project
         install as Development Dependencies [npm i --save-dev package@version ex: npm i --save-dev typescript@4.5.4]
             "@types/bcrypt": "^5.0.0",
             "@types/express": "^4.17.13",
+            "@types/body-parser": "^1.19.2",
+            "@types/cors": "^2.8.12",
             "@types/express-validator": "^3.0.0",
             "@types/jasmine": "^3.10.3",
             "@types/jsonwebtoken": "^8.5.8",

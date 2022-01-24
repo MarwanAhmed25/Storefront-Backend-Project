@@ -44,25 +44,31 @@ var index_1 = __importDefault(require("../../index"));
 var users_1 = require("../../models/users");
 var orders_1 = require("../../models/orders");
 var products_1 = require("../../models/products");
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
+var secret = process.env.token;
 var api = (0, supertest_1.default)(index_1.default);
 var user_ = new users_1.User();
 var order_ = new orders_1.Order();
 var product_ = new products_1.Product();
+var token;
+var permession;
 describe('orders handlars api test', function () {
     it('orders index route', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var u, res1, res;
+        var u, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     u = {
                         id: 1,
-                        first_name: 'marwan',
-                        last_name: 'ahmed',
+                        first_name: 'maro',
+                        last_name: 'nnn',
                         password: '123'
                     };
                     return [4 /*yield*/, user_.create(u)];
                 case 1:
-                    res1 = _a.sent();
+                    token = _a.sent();
                     return [4 /*yield*/, api.get('/users/1/orders')];
                 case 2:
                     res = _a.sent();
@@ -98,8 +104,10 @@ describe('orders handlars api test', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
+                    permession = jsonwebtoken_1.default.sign({ user: token }, secret);
                     d = {
-                        'status': 'open'
+                        'status': 'open',
+                        'token': permession
                     };
                     return [4 /*yield*/, api.post('/users/1/orders').send(d)];
                 case 1:
@@ -116,7 +124,8 @@ describe('orders handlars api test', function () {
             switch (_a.label) {
                 case 0:
                     d = {
-                        'status': 'open'
+                        'status': 'compete',
+                        'token': permession
                     };
                     return [4 /*yield*/, api.patch('/users/1/orders/1').send(d)];
                 case 1:
@@ -143,7 +152,8 @@ describe('orders handlars api test', function () {
                     res1 = _a.sent();
                     d = {
                         'product_id': 1,
-                        'quantity': 5
+                        'quantity': 5,
+                        'token': permession
                     };
                     return [4 /*yield*/, api.post('/users/1/orders/1/products').send(d)];
                 case 2:
@@ -157,7 +167,7 @@ describe('orders handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.delete('/users/1/orders/1')];
+                case 0: return [4 /*yield*/, api.delete('/users/1/orders/1').send({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

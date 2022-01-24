@@ -3,22 +3,28 @@ import route from '../../index';
 import { User, user } from "../../models/users";
 import { Order, order } from "../../models/orders";
 import { Product, product } from "../../models/products";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
+dotenv.config();
+const secret:string = (process.env.token as unknown)as string;
 const api = supertest(route);
 const user_ = new User();
 const order_ = new Order();
 const product_ = new Product();
 
+let token:user;
+let permession:string;
 describe('orders handlars api test',()=>{
 
     it('orders index route',async ()=>{
         const u:user ={
             id:1,
-            first_name:'marwan',
-            last_name:'ahmed',
+            first_name:'maro',
+            last_name:'nnn',
             password:'123'
         }
-        const res1 = await user_.create(u);
+        token = await user_.create(u);
         const res = await api.get('/users/1/orders');
         expect(res.status).toBe(200);
     })
@@ -35,9 +41,10 @@ describe('orders handlars api test',()=>{
     })
     //status
     it('orders create route',async ()=>{
-       
+       permession = jwt.sign({user:token}, secret);
         const d={
-            'status':'open'
+            'status':'open',
+            'token':permession
         }
         const res = await api.post('/users/1/orders').send(d);
         expect(res.status).toBe(200);
@@ -45,7 +52,8 @@ describe('orders handlars api test',()=>{
     //status
     it('orders update route',async ()=>{
         const d={
-            'status':'open'
+            'status':'compete',
+            'token':permession
         }
         const res = await api.patch('/users/1/orders/1').send(d);
         expect(res.status).toBe(200);
@@ -64,15 +72,16 @@ describe('orders handlars api test',()=>{
         
         const d={
             'product_id':1,
-            'quantity':5
+            'quantity':5,
+            'token':permession
         }
         const res = await api.post('/users/1/orders/1/products').send(d);
         expect(res.status).toBe(200);
     })
 
     it('oreders delete route',async ()=>{
-        const res = await api.delete('/users/1/orders/1');
-        
+        const res = await api.delete('/users/1/orders/1').send({'token':permession});
         expect(res.status).toBe(200);
+        
     })
 })

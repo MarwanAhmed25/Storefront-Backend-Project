@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var users_1 = require("../models/users");
+var bcrypt_1 = __importDefault(require("bcrypt"));
 var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
@@ -59,7 +60,6 @@ function index(req, res) {
                     return [3 /*break*/, 3];
                 case 2:
                     e_1 = _a.sent();
-                    console.log("".concat(e_1));
                     res.status(400).json("".concat(e_1));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -81,7 +81,6 @@ function show(req, res) {
                     return [3 /*break*/, 3];
                 case 2:
                     e_2 = _a.sent();
-                    console.log("".concat(e_2));
                     res.status(400).json("".concat(e_2));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
@@ -91,11 +90,17 @@ function show(req, res) {
 }
 function update(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var u, resault, e_3;
+        var token, permession, u, resault, newToken, e_3, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
+                    _a.trys.push([0, 7, , 8]);
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 3, , 4]);
                     u = {
                         id: req.params.id,
                         first_name: req.body.first_name,
@@ -103,31 +108,41 @@ function update(req, res) {
                         password: ''
                     };
                     return [4 /*yield*/, user_obj.update(u)];
-                case 1:
-                    resault = _a.sent();
-                    res.status(200).json(resault);
-                    return [3 /*break*/, 3];
                 case 2:
+                    resault = _a.sent();
+                    newToken = jsonwebtoken_1.default.sign({ user: resault }, secret);
+                    res.status(200).json(newToken);
+                    return [3 /*break*/, 4];
+                case 3:
                     e_3 = _a.sent();
-                    console.log("".concat(e_3));
                     res.status(400).json("".concat(e_3));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    e_4 = _a.sent();
+                    res.status(400).send("".concat(e_4));
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
 function create(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var u, resault, token, e_4;
+        var hash, u, resault, token, e_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
+                    hash = bcrypt_1.default.hashSync(req.body.password + process.env.extra, parseInt(process.env.round));
                     u = {
                         first_name: req.body.first_name,
                         last_name: req.body.last_name,
-                        password: req.body.password,
+                        password: hash,
                     };
                     return [4 /*yield*/, user_obj.create(u)];
                 case 1:
@@ -136,9 +151,8 @@ function create(req, res) {
                     res.status(200).json(token);
                     return [3 /*break*/, 3];
                 case 2:
-                    e_4 = _a.sent();
-                    console.log("".concat(e_4));
-                    res.status(400).json("".concat(e_4));
+                    e_5 = _a.sent();
+                    res.status(400).json("".concat(e_5));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -147,29 +161,37 @@ function create(req, res) {
 }
 function delete_(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, e_5;
+        var token, permession, resault, e_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, user_obj.delete(parseInt(req.params.id))];
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, user_obj.delete(parseInt(req.params.id))];
+                case 2:
                     resault = _a.sent();
                     res.status(200).json(resault);
-                    return [3 /*break*/, 3];
-                case 2:
-                    e_5 = _a.sent();
-                    console.log("".concat(e_5));
-                    res.status(400).json("".concat(e_5));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_6 = _a.sent();
+                    res.status(400).json("".concat(e_6));
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [2 /*return*/];
             }
         });
     });
 }
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, username, password, token, resault, e_6;
+        var _a, username, password, token, resault, e_7;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
@@ -184,9 +206,30 @@ function login(req, res) {
                         res.status(400).send('faild');
                     return [3 /*break*/, 3];
                 case 2:
-                    e_6 = _b.sent();
-                    console.log("".concat(e_6));
-                    res.status(400).json("".concat(e_6));
+                    e_7 = _b.sent();
+                    res.status(400).json("".concat(e_7));
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+function get_token(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var resault, token, e_8;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    return [4 /*yield*/, user_obj.show(parseInt(req.params.id))];
+                case 1:
+                    resault = _a.sent();
+                    token = jsonwebtoken_1.default.sign({ user: resault }, secret);
+                    res.status(200).json(token);
+                    return [3 /*break*/, 3];
+                case 2:
+                    e_8 = _a.sent();
+                    res.status(400).json("".concat(e_8));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -198,6 +241,7 @@ function mainRoutes(app) {
     app.get('/users', index);
     app.get('/users/:id', show);
     app.post('/users', create);
+    app.get('/users/:id/get_token', get_token);
     app.patch('/users/:id', update);
     app.delete('/users/:id', delete_);
 }
