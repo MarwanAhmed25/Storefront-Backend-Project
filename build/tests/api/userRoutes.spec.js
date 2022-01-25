@@ -51,10 +51,18 @@ var api = (0, supertest_1.default)(index_1.default);
 var token;
 describe('users handlars api test', function () {
     it('users index route', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var res;
+        var u, res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.get('/users')];
+                case 0:
+                    u = {
+                        id: 1,
+                        first_name: 'maro',
+                        last_name: 'nnn',
+                        password: '$2b$05$N3b8OrzeaE2E/Kwqu1PCH.Zdy9wNEwPUD3TY9RtZXZX6gGjATSYUu'
+                    };
+                    token = jsonwebtoken_1.default.sign({ user: u }, secret);
+                    return [4 /*yield*/, api.get('/users').send({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -66,7 +74,7 @@ describe('users handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.get('/users/1')];
+                case 0: return [4 /*yield*/, api.get('/users/1').send({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

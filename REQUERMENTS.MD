@@ -3,12 +3,12 @@ Database Schema:
 
         (id serial primary key, first_name varchar, last_name varchar, password varchar)
 
-        index   --> /users     [get]    no content in body
-        show    --> /users/:id [get]    no content in body
+        index   --> /users     [get]    body{token}
+        show    --> /users/:id [get]    body{token}
         create  --> /users     [post]   body{first_name, last_name, password}
         update  --> /users/:id [patch]  body{first_name, last_name, token}
         delete  --> /users/:id [delete] body{token}
-        login   --> /login     [post]   body{username, password} or body{token}
+        login   --> /login     [post]   body{username, password}
         get_token-> /users/:id/get_token [get] no body content
         
     Products Table:
@@ -25,8 +25,8 @@ Database Schema:
 
         (id serial primary key, status varchar, user_id bigint references (user table))
 
-        index      --> /users/:user_id/orders           [get] no content in body
-        show       --> /users/:user_id/orders/:order_id [get] no content in body
+        index      --> /users/:user_id/orders           [get] body{token}
+        show       --> /users/:user_id/orders/:order_id [get] body{token}
         create     --> /users/:user_id/orders           [post] body{status, token}
         update     --> /users/:user_id/orders/:order_id [patch] body{status, token}
         delete     --> /users/:user_id/orders/:order_id [delete] body{token}

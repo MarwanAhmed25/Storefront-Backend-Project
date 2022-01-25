@@ -10,22 +10,42 @@ const user_obj = new User();
 async function index(req: Request, res: Response) {
 
   try{
-    const resault = await user_obj.index();
-    res.status(200).json(resault);
-  }catch(e)
-  {
-    res.status(400).json(`${e}`);
+    const token = req.body.token;
+    const permession = jwt.verify(token, secret);
+    if(permession){
+      try{
+        const resault = await user_obj.index();
+        res.status(200).json(resault);
+      }catch(e)
+      {
+        res.status(400).json(`${e}`);
+      }
+    }
+    else
+      res.send('Not allowed login first!!');
+  }catch(e){
+    res.status(400).send(`${e}`);
   }
 }
 
 async function show(req: Request, res: Response) {
 
   try{
-    const resault = await user_obj.show(parseInt(req.params.id));
-    res.status(200).json(resault);
-  }catch(e)
-  {
-    res.status(400).json(`${e}`);
+    const token = req.body.token;
+    const permession = jwt.verify(token, secret);
+    if(permession){
+      try{
+        const resault = await user_obj.show(parseInt(req.params.id));
+        res.status(200).json(resault);
+      }catch(e)
+      {
+        res.status(400).json(`${e}`);
+      }
+    }
+    else
+      res.send('Not allowed login first!!');
+  }catch(e){
+    res.status(400).send(`${e}`);
   }
 
 }
@@ -93,10 +113,10 @@ async function delete_(req: Request, res: Response) {
 
 async function login(req: Request, res: Response) {
   try{
-    const {username, password, token}= req.body;
+    const {username, password}= req.body;
 
     const resault = await user_obj.auth(username, password);
-    if(resault != null || jwt.verify(token, secret))
+    if(resault != null)
       res.status(200).send('succeed');
     else
       res.status(400).send('faild');

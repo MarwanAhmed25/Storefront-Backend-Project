@@ -25,7 +25,8 @@ describe('orders handlars api test',()=>{
             password:'123'
         }
         token = await user_.create(u);
-        const res = await api.get('/users/1/orders');
+        permession = jwt.sign({user:token}, secret);
+        const res = await api.get('/users/1/orders').send({'token':permession});
         expect(res.status).toBe(200);
     })
 
@@ -36,12 +37,12 @@ describe('orders handlars api test',()=>{
             user_id:1
         }
         const res1 = await order_.create(o);
-        const res = await api.get('/users/1/orders/1');
+        const res = await api.get('/users/1/orders/1').send({'token':permession});
         expect(res.status).toBe(200);
     })
     //status
     it('orders create route',async ()=>{
-       permession = jwt.sign({user:token}, secret);
+       
         const d={
             'status':'open',
             'token':permession

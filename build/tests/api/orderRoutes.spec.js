@@ -69,7 +69,8 @@ describe('orders handlars api test', function () {
                     return [4 /*yield*/, user_.create(u)];
                 case 1:
                     token = _a.sent();
-                    return [4 /*yield*/, api.get('/users/1/orders')];
+                    permession = jsonwebtoken_1.default.sign({ user: token }, secret);
+                    return [4 /*yield*/, api.get('/users/1/orders').send({ 'token': permession })];
                 case 2:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -90,7 +91,7 @@ describe('orders handlars api test', function () {
                     return [4 /*yield*/, order_.create(o)];
                 case 1:
                     res1 = _a.sent();
-                    return [4 /*yield*/, api.get('/users/1/orders/1')];
+                    return [4 /*yield*/, api.get('/users/1/orders/1').send({ 'token': permession })];
                 case 2:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -104,7 +105,6 @@ describe('orders handlars api test', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    permession = jsonwebtoken_1.default.sign({ user: token }, secret);
                     d = {
                         'status': 'open',
                         'token': permession

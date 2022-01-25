@@ -47,49 +47,79 @@ var secret = process.env.token;
 var order_obj = new orders_1.Order();
 function index(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, e_1;
+        var token, permession, resault, e_1, e_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, order_obj.index(parseInt(req.params.user_id))];
+                    _a.trys.push([0, 7, , 8]);
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, order_obj.index(parseInt(req.params.user_id))];
+                case 2:
                     resault = _a.sent();
                     res.json(resault);
-                    return [3 /*break*/, 3];
-                case 2:
+                    return [3 /*break*/, 4];
+                case 3:
                     e_1 = _a.sent();
                     res.status(400).json("".concat(e_1));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    e_2 = _a.sent();
+                    res.status(400).send("".concat(e_2));
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
 function show(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, e_2;
+        var token, permession, resault, e_3, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, order_obj.show(parseInt(req.params.order_id), parseInt(req.params.user_id))];
+                    _a.trys.push([0, 7, , 8]);
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, order_obj.show(parseInt(req.params.order_id), parseInt(req.params.user_id))];
+                case 2:
                     resault = _a.sent();
                     res.json(resault);
-                    return [3 /*break*/, 3];
-                case 2:
-                    e_2 = _a.sent();
-                    res.status(400).json("".concat(e_2));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_3 = _a.sent();
+                    res.status(400).json("".concat(e_3));
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    e_4 = _a.sent();
+                    res.status(400).send("".concat(e_4));
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
 function update(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, permession, o, resault, e_3;
+        var token, permession, o, resault, e_5;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -110,8 +140,8 @@ function update(req, res) {
                     res.json(resault);
                     return [3 /*break*/, 4];
                 case 3:
-                    e_3 = _a.sent();
-                    res.status(400).json("".concat(e_3));
+                    e_5 = _a.sent();
+                    res.status(400).json("".concat(e_5));
                     return [3 /*break*/, 4];
                 case 4: return [3 /*break*/, 6];
                 case 5:
@@ -124,7 +154,7 @@ function update(req, res) {
 }
 function create(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, permession, o, resault, e_4;
+        var token, permession, o, resault, e_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -144,8 +174,8 @@ function create(req, res) {
                     res.json(resault);
                     return [3 /*break*/, 4];
                 case 3:
-                    e_4 = _a.sent();
-                    res.status(400).json("".concat(e_4));
+                    e_6 = _a.sent();
+                    res.status(400).json("".concat(e_6));
                     return [3 /*break*/, 4];
                 case 4: return [3 /*break*/, 6];
                 case 5:
@@ -158,7 +188,7 @@ function create(req, res) {
 }
 function delete_(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, permession, resault, e_5;
+        var token, permession, resault, e_7;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -174,8 +204,8 @@ function delete_(req, res) {
                     res.json(resault);
                     return [3 /*break*/, 4];
                 case 3:
-                    e_5 = _a.sent();
-                    res.status(400).json("".concat(e_5));
+                    e_7 = _a.sent();
+                    res.status(400).json("".concat(e_7));
                     return [3 /*break*/, 4];
                 case 4: return [3 /*break*/, 6];
                 case 5:
@@ -188,7 +218,7 @@ function delete_(req, res) {
 }
 function addProduct(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var order_id, product_id, quantity, token, permession, resault, e_6;
+        var order_id, product_id, quantity, token, permession, resault, e_8;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -209,8 +239,8 @@ function addProduct(req, res) {
                     _a.label = 3;
                 case 3: return [3 /*break*/, 5];
                 case 4:
-                    e_6 = _a.sent();
-                    res.status(400).json("".concat(e_6));
+                    e_8 = _a.sent();
+                    res.status(400).json("".concat(e_8));
                     return [3 /*break*/, 5];
                 case 5: return [2 /*return*/];
             }

@@ -15,17 +15,25 @@ let token:string;
 describe('users handlars api test',()=>{
 
     it('users index route',async ()=>{
-        const res = await api.get('/users');
+        const u:user= {
+            id: 1,
+            first_name: 'maro',
+            last_name: 'nnn',
+            password: '$2b$05$N3b8OrzeaE2E/Kwqu1PCH.Zdy9wNEwPUD3TY9RtZXZX6gGjATSYUu'
+        };
+        token = jwt.sign({user:u}, secret);
+        const res = await api.get('/users').send({'token':token});
         expect(res.status).toBe(200);
     })
 
     it('users show route',async ()=>{
         
-        const res = await api.get('/users/1');
+        const res = await api.get('/users/1').send({'token':token});
         expect(res.status).toBe(200);
     })
 
     it('users create route',async ()=>{
+        
         const d={
             'first_name':'marwan',
             'last_name':'ahmed',

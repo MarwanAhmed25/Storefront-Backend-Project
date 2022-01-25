@@ -10,22 +10,42 @@ const order_obj = new Order();
 async function index(req: Request, res: Response) {
 
   try{
-    const resault = await order_obj.index(parseInt(req.params.user_id));
-    res.json(resault);
-  }catch(e)
-  {
-    res.status(400).json(`${e}`);
+    const token = req.body.token;
+    const permession = jwt.verify(token, secret);
+    if(permession){
+      try{
+        const resault = await order_obj.index(parseInt(req.params.user_id));
+        res.json(resault);
+      }catch(e)
+      {
+        res.status(400).json(`${e}`);
+      }
+    }
+    else
+      res.send('Not allowed login first!!');
+  }catch(e){
+    res.status(400).send(`${e}`);
   }
 }
 
 async function show(req: Request, res: Response) {
 
   try{
-    const resault = await order_obj.show(parseInt(req.params.order_id), parseInt(req.params.user_id));
-    res.json(resault);
-  }catch(e)
-  {
-    res.status(400).json(`${e}`);
+    const token = req.body.token;
+    const permession = jwt.verify(token, secret);
+    if(permession){
+      try{
+        const resault = await order_obj.show(parseInt(req.params.order_id), parseInt(req.params.user_id));
+        res.json(resault);
+      }catch(e)
+      {
+        res.status(400).json(`${e}`);
+      }
+    }
+    else
+      res.send('Not allowed login first!!');
+  }catch(e){
+    res.status(400).send(`${e}`);
   }
 }
 

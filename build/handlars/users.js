@@ -48,49 +48,79 @@ var secret = process.env.token;
 var user_obj = new users_1.User();
 function index(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, e_1;
+        var token, permession, resault, e_1, e_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, user_obj.index()];
+                    _a.trys.push([0, 7, , 8]);
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, user_obj.index()];
+                case 2:
                     resault = _a.sent();
                     res.status(200).json(resault);
-                    return [3 /*break*/, 3];
-                case 2:
+                    return [3 /*break*/, 4];
+                case 3:
                     e_1 = _a.sent();
                     res.status(400).json("".concat(e_1));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    e_2 = _a.sent();
+                    res.status(400).send("".concat(e_2));
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
 function show(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, e_2;
+        var token, permession, resault, e_3, e_4;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, user_obj.show(parseInt(req.params.id))];
+                    _a.trys.push([0, 7, , 8]);
+                    token = req.body.token;
+                    permession = jsonwebtoken_1.default.verify(token, secret);
+                    if (!permession) return [3 /*break*/, 5];
+                    _a.label = 1;
                 case 1:
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, user_obj.show(parseInt(req.params.id))];
+                case 2:
                     resault = _a.sent();
                     res.status(200).json(resault);
-                    return [3 /*break*/, 3];
-                case 2:
-                    e_2 = _a.sent();
-                    res.status(400).json("".concat(e_2));
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
+                    return [3 /*break*/, 4];
+                case 3:
+                    e_3 = _a.sent();
+                    res.status(400).json("".concat(e_3));
+                    return [3 /*break*/, 4];
+                case 4: return [3 /*break*/, 6];
+                case 5:
+                    res.send('Not allowed login first!!');
+                    _a.label = 6;
+                case 6: return [3 /*break*/, 8];
+                case 7:
+                    e_4 = _a.sent();
+                    res.status(400).send("".concat(e_4));
+                    return [3 /*break*/, 8];
+                case 8: return [2 /*return*/];
             }
         });
     });
 }
 function update(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, permession, u, resault, newToken, e_3, e_4;
+        var token, permession, u, resault, newToken, e_5, e_6;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -114,8 +144,8 @@ function update(req, res) {
                     res.status(200).json(newToken);
                     return [3 /*break*/, 4];
                 case 3:
-                    e_3 = _a.sent();
-                    res.status(400).json("".concat(e_3));
+                    e_5 = _a.sent();
+                    res.status(400).json("".concat(e_5));
                     return [3 /*break*/, 4];
                 case 4: return [3 /*break*/, 6];
                 case 5:
@@ -123,8 +153,8 @@ function update(req, res) {
                     _a.label = 6;
                 case 6: return [3 /*break*/, 8];
                 case 7:
-                    e_4 = _a.sent();
-                    res.status(400).send("".concat(e_4));
+                    e_6 = _a.sent();
+                    res.status(400).send("".concat(e_6));
                     return [3 /*break*/, 8];
                 case 8: return [2 /*return*/];
             }
@@ -133,7 +163,7 @@ function update(req, res) {
 }
 function create(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var hash, u, resault, token, e_5;
+        var hash, u, resault, token, e_7;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -151,8 +181,8 @@ function create(req, res) {
                     res.status(200).json(token);
                     return [3 /*break*/, 3];
                 case 2:
-                    e_5 = _a.sent();
-                    res.status(400).json("".concat(e_5));
+                    e_7 = _a.sent();
+                    res.status(400).json("".concat(e_7));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -161,7 +191,7 @@ function create(req, res) {
 }
 function delete_(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, permession, resault, e_6;
+        var token, permession, resault, e_8;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -177,8 +207,8 @@ function delete_(req, res) {
                     res.status(200).json(resault);
                     return [3 /*break*/, 4];
                 case 3:
-                    e_6 = _a.sent();
-                    res.status(400).json("".concat(e_6));
+                    e_8 = _a.sent();
+                    res.status(400).json("".concat(e_8));
                     return [3 /*break*/, 4];
                 case 4: return [3 /*break*/, 6];
                 case 5:
@@ -191,23 +221,23 @@ function delete_(req, res) {
 }
 function login(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, username, password, token, resault, e_7;
+        var _a, username, password, resault, e_9;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 2, , 3]);
-                    _a = req.body, username = _a.username, password = _a.password, token = _a.token;
+                    _a = req.body, username = _a.username, password = _a.password;
                     return [4 /*yield*/, user_obj.auth(username, password)];
                 case 1:
                     resault = _b.sent();
-                    if (resault != null || jsonwebtoken_1.default.verify(token, secret))
+                    if (resault != null)
                         res.status(200).send('succeed');
                     else
                         res.status(400).send('faild');
                     return [3 /*break*/, 3];
                 case 2:
-                    e_7 = _b.sent();
-                    res.status(400).json("".concat(e_7));
+                    e_9 = _b.sent();
+                    res.status(400).json("".concat(e_9));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
@@ -216,7 +246,7 @@ function login(req, res) {
 }
 function get_token(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var resault, token, e_8;
+        var resault, token, e_10;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -228,8 +258,8 @@ function get_token(req, res) {
                     res.status(200).json(token);
                     return [3 /*break*/, 3];
                 case 2:
-                    e_8 = _a.sent();
-                    res.status(400).json("".concat(e_8));
+                    e_10 = _a.sent();
+                    res.status(400).json("".concat(e_10));
                     return [3 /*break*/, 3];
                 case 3: return [2 /*return*/];
             }
