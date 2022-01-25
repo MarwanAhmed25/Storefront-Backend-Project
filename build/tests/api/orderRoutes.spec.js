@@ -107,9 +107,8 @@ describe('orders handlars api test', function () {
                 case 0:
                     d = {
                         'status': 'open',
-                        'token': permession
                     };
-                    return [4 /*yield*/, api.post('/users/1/orders').send(d)];
+                    return [4 /*yield*/, api.post('/users/1/orders').send(d).set({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -124,10 +123,9 @@ describe('orders handlars api test', function () {
             switch (_a.label) {
                 case 0:
                     d = {
-                        'status': 'compete',
-                        'token': permession
+                        'status': 'compete'
                     };
-                    return [4 /*yield*/, api.patch('/users/1/orders/1').send(d)];
+                    return [4 /*yield*/, api.patch('/users/1/orders/1').send(d).set({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -152,10 +150,9 @@ describe('orders handlars api test', function () {
                     res1 = _a.sent();
                     d = {
                         'product_id': 1,
-                        'quantity': 5,
-                        'token': permession
+                        'quantity': 5
                     };
-                    return [4 /*yield*/, api.post('/users/1/orders/1/products').send(d)];
+                    return [4 /*yield*/, api.post('/users/1/orders/1/products').send(d).set({ 'token': permession })];
                 case 2:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -167,7 +164,7 @@ describe('orders handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.delete('/users/1/orders/1').send({ 'token': permession })];
+                case 0: return [4 /*yield*/, api.delete('/users/1/orders/1').set({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

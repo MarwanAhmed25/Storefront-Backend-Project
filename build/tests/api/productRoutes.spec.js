@@ -86,10 +86,9 @@ describe('products handlars api test', function () {
                     d = {
                         'name': 'marwan',
                         'price': 5,
-                        'catogery': 'marwan',
-                        'token': permession
+                        'catogery': 'marwan'
                     };
-                    return [4 /*yield*/, api.post('/products').send(d)];
+                    return [4 /*yield*/, api.post('/products').send(d).set({ 'token': permession })];
                 case 2:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -106,10 +105,9 @@ describe('products handlars api test', function () {
                     d = {
                         'name': 'marwan',
                         'price': 20,
-                        'catogery': 'marwan',
-                        'token': permession
+                        'catogery': 'marwan'
                     };
-                    return [4 /*yield*/, api.patch('/products/1').send(d)];
+                    return [4 /*yield*/, api.patch('/products/1').send(d).set({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -121,7 +119,7 @@ describe('products handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.delete('/products/2').send({ 'token': permession })];
+                case 0: return [4 /*yield*/, api.delete('/products/2').set({ 'token': permession })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

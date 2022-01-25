@@ -123,7 +123,7 @@ function update(req, res) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
@@ -158,7 +158,7 @@ function create(req, res) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
@@ -192,7 +192,7 @@ function delete_(req, res) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
@@ -226,7 +226,7 @@ function addProduct(req, res) {
                     order_id = parseInt(req.params.order_id);
                     product_id = parseInt(req.body.product_id);
                     quantity = parseInt(req.body.quantity);
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 2];
                     return [4 /*yield*/, order_obj.addProduct(order_id, product_id, quantity)];

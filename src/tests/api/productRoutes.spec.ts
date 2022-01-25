@@ -30,10 +30,9 @@ describe('products handlars api test',()=>{
         const d={
             'name':'marwan',
             'price':5,
-            'catogery':'marwan',
-            'token':permession
+            'catogery':'marwan'
         }
-        const res = await api.post('/products').send(d);
+        const res = await api.post('/products').send(d).set({'token':permession});
         expect(res.status).toBe(200);
     })
     //name, price category
@@ -41,15 +40,14 @@ describe('products handlars api test',()=>{
         const d={
             'name':'marwan',
             'price':20,
-            'catogery':'marwan',
-            'token':permession
+            'catogery':'marwan'
         }
-        const res = await api.patch('/products/1').send(d);
+        const res = await api.patch('/products/1').send(d).set({'token':permession});
         expect(res.status).toBe(200);
     })
 
     it('products delete route',async ()=>{
-        const res = await api.delete('/products/2').send({'token':permession});
+        const res = await api.delete('/products/2').set({'token':permession});
         expect(res.status).toBe(200);
         
     })

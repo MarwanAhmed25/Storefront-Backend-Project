@@ -125,7 +125,7 @@ function update(req, res) {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 7, , 8]);
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;
@@ -195,7 +195,7 @@ function delete_(req, res) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    token = req.body.token;
+                    token = req.headers.token;
                     permession = jsonwebtoken_1.default.verify(token, secret);
                     if (!permession) return [3 /*break*/, 5];
                     _a.label = 1;

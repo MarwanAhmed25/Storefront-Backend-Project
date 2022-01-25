@@ -46,18 +46,16 @@ describe('orders handlars api test',()=>{
        
         const d={
             'status':'open',
-            'token':permession
         }
-        const res = await api.post('/users/1/orders').send(d);
+        const res = await api.post('/users/1/orders').send(d).set({'token':permession});
         expect(res.status).toBe(200);
     })
     //status
     it('orders update route',async ()=>{
         const d={
-            'status':'compete',
-            'token':permession
+            'status':'compete'
         }
-        const res = await api.patch('/users/1/orders/1').send(d);
+        const res = await api.patch('/users/1/orders/1').send(d).set({'token':permession});
         expect(res.status).toBe(200);
     })
 
@@ -74,15 +72,14 @@ describe('orders handlars api test',()=>{
         
         const d={
             'product_id':1,
-            'quantity':5,
-            'token':permession
+            'quantity':5
         }
-        const res = await api.post('/users/1/orders/1/products').send(d);
+        const res = await api.post('/users/1/orders/1/products').send(d).set({'token':permession});
         expect(res.status).toBe(200);
     })
 
     it('oreders delete route',async ()=>{
-        const res = await api.delete('/users/1/orders/1').send({'token':permession});
+        const res = await api.delete('/users/1/orders/1').set({'token':permession});
         expect(res.status).toBe(200);
         
     })

@@ -50,7 +50,8 @@ async function show(req: Request, res: Response) {
 }
 
 async function update(req: Request, res: Response) {
-  const token = req.body.token;
+
+  const token = (req.headers.token as unknown)as string;
   const permession = jwt.verify(token, secret);
   if(permession){
     try {
@@ -71,7 +72,7 @@ async function update(req: Request, res: Response) {
 }
 
 async function create(req: Request, res: Response) {
-  const token = req.body.token;
+  const token = (req.headers.token as unknown)as string;
   const permession = jwt.verify(token, secret);
   if(permession){
     try {
@@ -92,7 +93,7 @@ async function create(req: Request, res: Response) {
 
 async function delete_(req: Request, res: Response) {
 
-  const token = req.body.token;
+  const token = (req.headers.token as unknown)as string;
   const permession = jwt.verify(token, secret);
   if(permession){
     try {
@@ -114,7 +115,7 @@ async function addProduct(req: Request, res: Response) {
     const product_id = parseInt(req.body.product_id);
     const quantity = parseInt(req.body.quantity);
 
-    const token = req.body.token;
+    const token = (req.headers.token as unknown)as string;
     const permession = jwt.verify(token, secret);
     if(permession){
       const resault = await order_obj.addProduct(order_id, product_id, quantity);

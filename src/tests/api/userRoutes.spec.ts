@@ -47,10 +47,9 @@ describe('users handlars api test',()=>{
     it('users update route',async ()=>{
         const d={
             'first_name':'bassam',
-            'last_name':'ahmed',
-            'token':token
+            'last_name':'ahmed'
         }
-        const res = await api.patch('/users/1').send(d);
+        const res = await api.patch('/users/1').send(d).set({'token':token});
         expect(res.status).toBe(200);
     })
 
@@ -59,18 +58,18 @@ describe('users handlars api test',()=>{
             'token':token
         }
 
-        const res = await api.post('/login').send(d);
+        const res = await api.post('/login').set(d);
         expect(res.status).toBe(200);
     })
 
     it('users get token route',async ()=>{
-        const res = await api.get('/users/2/get_token').send({'token':token});
+        const res = await api.get('/users/2/get_token').set({'token':token});
         expect(res.status).toBe(200); 
         
     })
 
     it('users delete route',async ()=>{
-        const res = await api.delete('/users/2').send({'token':token});
+        const res = await api.delete('/users/2').set({'token':token});
         expect(res.status).toBe(200); 
         
     })

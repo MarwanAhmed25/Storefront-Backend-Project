@@ -108,10 +108,9 @@ describe('users handlars api test', function () {
                 case 0:
                     d = {
                         'first_name': 'bassam',
-                        'last_name': 'ahmed',
-                        'token': token
+                        'last_name': 'ahmed'
                     };
-                    return [4 /*yield*/, api.patch('/users/1').send(d)];
+                    return [4 /*yield*/, api.patch('/users/1').send(d).set({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -127,7 +126,7 @@ describe('users handlars api test', function () {
                     d = {
                         'token': token
                     };
-                    return [4 /*yield*/, api.post('/login').send(d)];
+                    return [4 /*yield*/, api.post('/login').set(d)];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -139,7 +138,7 @@ describe('users handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.get('/users/2/get_token').send({ 'token': token })];
+                case 0: return [4 /*yield*/, api.get('/users/2/get_token').set({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -151,7 +150,7 @@ describe('users handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.delete('/users/2').send({ 'token': token })];
+                case 0: return [4 /*yield*/, api.delete('/users/2').set({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
