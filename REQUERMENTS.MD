@@ -3,8 +3,8 @@ Database Schema:
 
         (id serial primary key, first_name varchar, last_name varchar, password varchar)
 
-        index   --> /users     [get]    body{token}
-        show    --> /users/:id [get]    body{token}
+        index   --> /users     [get]    header{token}
+        show    --> /users/:id [get]    header{token}
         create  --> /users     [post]   body{first_name, last_name, password}
         update  --> /users/:id [patch]  body{first_name, last_name, token}
         delete  --> /users/:id [delete] body{token}
@@ -25,8 +25,8 @@ Database Schema:
 
         (id serial primary key, status varchar, user_id bigint references (user table))
 
-        index      --> /users/:user_id/orders           [get] body{token}
-        show       --> /users/:user_id/orders/:order_id [get] body{token}
+        index      --> /users/:user_id/orders           [get] header{token}
+        show       --> /users/:user_id/orders/:order_id [get] header{token}
         create     --> /users/:user_id/orders           [post] body{status, token}
         update     --> /users/:user_id/orders/:order_id [patch] body{status, token}
         delete     --> /users/:user_id/orders/:order_id [delete] body{token}
@@ -39,4 +39,5 @@ Database Schema:
 
 
 
-                
+**user this token**
+                    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdF9uYW1lIjoiMTAwIiwibGFzdF9uYW1lIjoiNTAiLCJwYXNzd29yZCI6IiQyYiQwNSRQS1pKeHAvT1RmOFZpUzJ1LmRvNy8uZjZmTi5hMDN3WEpIb0QxcjQ3VmwwTFN1ZnpqVFoyLiJ9LCJpYXQiOjE2NDMxMjEzNjJ9.WqtMjQjllJlxMnQjW1aTdrgaD4kHvfmGSrQCWhV2C-0

@@ -62,7 +62,7 @@ describe('users handlars api test', function () {
                         password: '$2b$05$N3b8OrzeaE2E/Kwqu1PCH.Zdy9wNEwPUD3TY9RtZXZX6gGjATSYUu'
                     };
                     token = jsonwebtoken_1.default.sign({ user: u }, secret);
-                    return [4 /*yield*/, api.get('/users').send({ 'token': token })];
+                    return [4 /*yield*/, api.get('/users').set({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);
@@ -74,7 +74,7 @@ describe('users handlars api test', function () {
         var res;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, api.get('/users/1').send({ 'token': token })];
+                case 0: return [4 /*yield*/, api.get('/users/1').set({ 'token': token })];
                 case 1:
                     res = _a.sent();
                     expect(res.status).toBe(200);

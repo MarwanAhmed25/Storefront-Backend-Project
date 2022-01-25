@@ -26,7 +26,7 @@ describe('orders handlars api test',()=>{
         }
         token = await user_.create(u);
         permession = jwt.sign({user:token}, secret);
-        const res = await api.get('/users/1/orders').send({'token':permession});
+        const res = await api.get('/users/1/orders').set({'token':permession});
         expect(res.status).toBe(200);
     })
 
@@ -37,7 +37,8 @@ describe('orders handlars api test',()=>{
             user_id:1
         }
         const res1 = await order_.create(o);
-        const res = await api.get('/users/1/orders/1').send({'token':permession});
+        const res = await api.get('/users/1/orders/1').set({'token':permession});
+        
         expect(res.status).toBe(200);
     })
     //status

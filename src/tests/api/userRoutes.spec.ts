@@ -22,13 +22,13 @@ describe('users handlars api test',()=>{
             password: '$2b$05$N3b8OrzeaE2E/Kwqu1PCH.Zdy9wNEwPUD3TY9RtZXZX6gGjATSYUu'
         };
         token = jwt.sign({user:u}, secret);
-        const res = await api.get('/users').send({'token':token});
+        const res = await api.get('/users').set({'token':token});
         expect(res.status).toBe(200);
     })
 
     it('users show route',async ()=>{
         
-        const res = await api.get('/users/1').send({'token':token});
+        const res = await api.get('/users/1').set({'token':token});
         expect(res.status).toBe(200);
     })
 

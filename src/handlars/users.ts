@@ -10,7 +10,8 @@ const user_obj = new User();
 async function index(req: Request, res: Response) {
 
   try{
-    const token = req.body.token;
+    const token = (req.headers.token as unknown)as string;
+
     const permession = jwt.verify(token, secret);
     if(permession){
       try{
@@ -31,7 +32,7 @@ async function index(req: Request, res: Response) {
 async function show(req: Request, res: Response) {
 
   try{
-    const token = req.body.token;
+    const token = (req.headers.token as unknown)as string;
     const permession = jwt.verify(token, secret);
     if(permession){
       try{
